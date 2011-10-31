@@ -15,6 +15,14 @@
 		<put-attribute name="content" value="/WEB-INF/views/connect/facebookConnected.jsp" />
 	</definition>
 
+	<definition name="connect/linkedinConnect" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/linkedinConnect.jsp" />
+	</definition>
+
+	<definition name="connect/linkedinConnected" extends="page">
+		<put-attribute name="content" value="/WEB-INF/views/connect/linkedinConnected.jsp" />
+	</definition>
+
 	<definition name="connect/twitterConnect" extends="page">
 		<put-attribute name="content" value="/WEB-INF/views/connect/twitterConnect.jsp" />
 	</definition>

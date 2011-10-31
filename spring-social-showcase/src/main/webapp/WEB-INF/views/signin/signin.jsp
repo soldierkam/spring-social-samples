@@ -48,3 +48,10 @@
         <input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
 		<button type="submit"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" /></button>
 	</form>
+
+	<!-- LINKEDIN SIGNIN -->
+	<form name="li_signin" id="li_signin" action="<c:url value="/signin/linkedin"/>" method="POST">
+        <input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
+		<button type="submit">Sign in with LinkedIn</button>
+	</form>
+	

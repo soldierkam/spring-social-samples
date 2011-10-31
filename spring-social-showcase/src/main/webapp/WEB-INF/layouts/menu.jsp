@@ -24,3 +24,10 @@
 	<li><a href="<c:url value="/facebook/albums"/>">Albums</a></li>
 </ul>
 </c:if>
+
+<h4><a href="<c:url value="/linkedin"/>">LinkedIn</a></h4>
+<c:if test="${connectedToLinkedIn}">
+<ul class="menu">
+	<li><a href="<c:url value="/linkedin"/>">User Profile</a></li>
+</ul>
+</c:if>
