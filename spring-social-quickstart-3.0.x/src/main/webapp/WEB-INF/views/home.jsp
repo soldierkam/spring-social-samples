@@ -13,6 +13,22 @@
 	<c:forEach items="${friends}" var="friend">
 		<li><img src="http://graph.facebook.com/<c:out value="${friend.id}"/>/picture" align="middle"/><c:out value="${friend.name}"/></li>
 	</c:forEach>
-	</ul>	
+
+    </ul>
+
+    <h3>Videos you likes</h3>
+    <ul>
+	    <c:forEach items="${likes}" var="video">
+    		<li>
+    		    <img src="<c:out value="${video.thumbnails[0].url}"/>" align="middle"/>
+    		    <c:out value="${video.title}"/>
+    		</li>
+    	</c:forEach>
+
+    </ul>
+    <form method="POST" enctype="multipart/form-data" action="./upload">
+         <input type="file" name="video" >
+         <input type="submit">
+    </form>
 	</body>
 </html>

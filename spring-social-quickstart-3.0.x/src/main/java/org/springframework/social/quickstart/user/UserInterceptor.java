@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.vimeo.api.Vimeo;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -60,7 +61,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 		if (userId == null) {
 			return;
 		}
-		if (!userNotFound(userId)) {
+		if (userNotFound(userId)) {
 			userCookieGenerator.removeCookie(response);
 			return;
 		}
@@ -69,7 +70,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 
 	private void handleSignOut(HttpServletRequest request, HttpServletResponse response) {
 		if (SecurityContext.userSignedIn() && request.getServletPath().startsWith("/signout")) {
-			connectionRepository.createConnectionRepository(SecurityContext.getCurrentUser().getId()).removeConnections("facebook");
+			connectionRepository.createConnectionRepository(SecurityContext.getCurrentUser().getId()).findAllConnections();
 			userCookieGenerator.removeCookie(response);
 			SecurityContext.remove();			
 		}
@@ -85,8 +86,7 @@ public final class UserInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private boolean userNotFound(String userId) {
-		// doesn't bother checking a local user database: simply checks if the userId is connected to Facebook
-		return connectionRepository.createConnectionRepository(userId).findPrimaryConnection(Facebook.class) != null;
+		return connectionRepository.createConnectionRepository(userId).findConnections(Vimeo.class)== null;
 	}
 	
 }

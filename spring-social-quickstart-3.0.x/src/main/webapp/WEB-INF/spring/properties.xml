@@ -11,6 +11,8 @@
 	<util:properties id="defaultProperties">
 		<prop key="facebook.clientId">669df6cc9b11c3226b2f3e31b083acb2</prop>
 		<prop key="facebook.clientSecret">516af1d8f60e8f6364fddca8f0bc46bf</prop>
+        <prop key="vimeo.clientId">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</prop>
+        <prop key="vimeo.clientSecret">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</prop>
 	</util:properties>
 	
 </beans>

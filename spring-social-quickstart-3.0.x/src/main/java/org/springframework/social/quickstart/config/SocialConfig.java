@@ -36,6 +36,10 @@ import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.quickstart.user.SecurityContext;
 import org.springframework.social.quickstart.user.SimpleConnectionSignUp;
 import org.springframework.social.quickstart.user.User;
+import org.springframework.social.vimeo.api.Vimeo;
+import org.springframework.social.vimeo.connect.VimeoConnectionFactory;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  * Spring Social Configuration.
@@ -49,7 +53,13 @@ public class SocialConfig {
 	
 	@Value("${facebook.clientSecret}")
 	private String facebookClientSecret;
-	
+
+    @Value("${vimeo.clientId}")
+    private String vimeoClientId;
+
+    @Value("${vimeo.clientSecret}")
+    private String vimeoClientSecret;
+
 	@Inject
 	private DataSource dataSource;
 
@@ -61,6 +71,7 @@ public class SocialConfig {
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
 		registry.addConnectionFactory(new FacebookConnectionFactory(facebookClientId, facebookClientSecret));
+        registry.addConnectionFactory(new VimeoConnectionFactory(vimeoClientId, vimeoClientSecret));
 		return registry;
 	}
 
@@ -95,4 +106,16 @@ public class SocialConfig {
 	    return connectionRepository().getPrimaryConnection(Facebook.class).getApi();
 	}
 
+    @Bean
+    @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+    public Vimeo vimeo() {
+        return connectionRepository().getPrimaryConnection(Vimeo.class).getApi();
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(100000000);
+        return resolver;
+    }
 }
